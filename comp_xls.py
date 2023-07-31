@@ -23,6 +23,12 @@ for i in range(len(df2)):
             my_df.loc[len(my_df)] = {"Товар": name_article, "Кількість постачальника": df1['Кількість'][index_article],
                                      "Кількість замовника": df2['Кількість'][i]}
 
+for i in range(len(df1)):
+    name_article = df1['Товар'][i]
+    if name_article not in df2['Товар'].values:
+        my_df.loc[len(my_df)] = {"Товар": name_article, "Кількість постачальника": '0', "Кількість замовника": df1['Кількість'][i]}
+
+my_df = my_df.drop_duplicates(subset=['Товар'])
 my_df.to_excel('out_my2.xlsx')
 
 df3 = df1.merge(df2, how='outer', left_on=('Товар'), right_on=('Товар'),
