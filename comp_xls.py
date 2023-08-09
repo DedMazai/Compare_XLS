@@ -11,7 +11,6 @@ data_client.dropna(subset=['Товар', 'Кількість'], inplace=True)
 data_importer['Кількість'] = data_importer['Кількість'].apply(lambda x: float(x))
 data_client['Кількість'] = data_client['Кількість'].apply(lambda x: float(x.split(' ')[0].replace(',', '.')))
 
-
 data_with_values = data_importer.merge(data_client, how='outer', on='Товар',
                                        suffixes=('_постач', '_замов'))
 
